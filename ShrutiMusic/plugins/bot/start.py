@@ -16,7 +16,6 @@ from ShrutiMusic.utils.database import (
     is_banned_user,
     is_on_off,
 )
-from ShrutiMusic.utils import bot_sys_stats
 from ShrutiMusic.utils.decorators.language import LanguageStart
 from ShrutiMusic.utils.formatters import get_readable_time
 from ShrutiMusic.utils.inline import help_pannel_page1, private_panel, start_panel
@@ -28,6 +27,12 @@ from strings import get_string
 @LanguageStart
 async def start_pm(client, message: Message, _):
     await add_served_user(message.from_user.id)
+    start_caption = (
+        f"👋 Hey {message.from_user.mention},\n"
+        "This is 𝗠ᴜsɪᴄ !\n\n"
+        "🎧 A music player bot with some awesome and useful features.\n\n"
+        "ℹ️ Click on the Commands button for more info."
+    )
     if len(message.text.split()) > 1:
         name = message.text.split(None, 1)[1]
         if name[0:4] == "help":
@@ -101,18 +106,17 @@ async def start_pm(client, message: Message, _):
                 )
         if name == "start":
             out = private_panel(_)
-            UP, CPU, RAM, DISK = await bot_sys_stats()
             try:
                 await message.reply_photo(
                     photo=config.START_IMG_URL,
-                    caption=_["start_2"].format(message.from_user.mention, app.mention, UP, DISK, CPU, RAM),
+                    caption=start_caption,
                     reply_markup=InlineKeyboardMarkup(out),
                     message_effect_id=5159385139981059251,
                 )
             except:
                 await message.reply_photo(
                     photo=config.START_IMG_URL,
-                    caption=_["start_2"].format(message.from_user.mention, app.mention, UP, DISK, CPU, RAM),
+                    caption=start_caption,
                     reply_markup=InlineKeyboardMarkup(out),
                 )
             if await is_on_off(2):
@@ -122,18 +126,17 @@ async def start_pm(client, message: Message, _):
                 )
     else:
         out = private_panel(_)
-        UP, CPU, RAM, DISK = await bot_sys_stats()
         try:
             await message.reply_photo(
                 photo=config.START_IMG_URL,
-                caption=_["start_2"].format(message.from_user.mention, app.mention, UP, DISK, CPU, RAM),
+                caption=start_caption,
                 reply_markup=InlineKeyboardMarkup(out),
                 message_effect_id=5159385139981059251,
             )
         except:
             await message.reply_photo(
                 photo=config.START_IMG_URL,
-                caption=_["start_2"].format(message.from_user.mention, app.mention, UP, DISK, CPU, RAM),
+                caption=start_caption,
                 reply_markup=InlineKeyboardMarkup(out),
             )
         if await is_on_off(2):
