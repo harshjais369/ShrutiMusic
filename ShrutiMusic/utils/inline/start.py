@@ -24,18 +24,10 @@ import config
 from ShrutiMusic import app
 
 
-def _button(*, text, style=None, **kwargs):
-    if style:
-        try:
-            return InlineKeyboardButton(text=text, style=style, **kwargs)
-        except TypeError:
-            pass
-    return InlineKeyboardButton(text=text, **kwargs)
-
 def start_panel(_):
     buttons = [
         [
-            _button(
+            InlineKeyboardButton(
                 text=_["S_B_1"],
                 style="green",
                 url=f"https://t.me/{app.username}?startgroup=true",
@@ -43,8 +35,8 @@ def start_panel(_):
             InlineKeyboardButton(text=_["S_B_2"], url=config.SUPPORT_GROUP),
         ],
         [
-            _button(text=_["E_X_1"], style="red", url=config.UPSTREAM_REPO),
-            _button(text=_["S_B_11"], style="blue", callback_data="about_page")  # About button
+            InlineKeyboardButton(text=_["E_X_1"], style="red", url=config.UPSTREAM_REPO),
+            InlineKeyboardButton(text=_["S_B_11"], style="blue", callback_data="about_page"),
         ],
     ]
     return buttons
@@ -52,33 +44,33 @@ def start_panel(_):
 def private_panel(_):
     buttons = [
         [
-            _button(
+            InlineKeyboardButton(
                 text=_["S_B_3"],
                 style="green",
                 url=f"https://t.me/{app.username}?startgroup=true",
             )
         ],
         [
-            _button(
+            InlineKeyboardButton(
                 text=_["S_B_11"],
                 style="blue",
-                callback_data="about_page"
+                callback_data="about_page",
             ),
             InlineKeyboardButton(
                 text=_["S_B_12"],
-                callback_data="owner_page"
-            )
+                callback_data="owner_page",
+            ),
         ],
         [
-            _button(
+            InlineKeyboardButton(
                 text=_["E_X_1"],
                 style="red",
-                callback_data="fork_repo"
+                callback_data="fork_repo",
             ),
-            _button(text=_["S_B_5"], style="red", user_id=config.OWNER_ID),
+            InlineKeyboardButton(text=_["S_B_5"], style="red", user_id=config.OWNER_ID),
         ],
         [
-            _button(text=_["S_B_4"], style="blue", callback_data="help_page_1")
+            InlineKeyboardButton(text=_["S_B_4"], style="blue", callback_data="help_page_1"),
         ],
     ]
     return buttons

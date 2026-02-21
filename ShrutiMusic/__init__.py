@@ -26,6 +26,8 @@ from ShrutiMusic.core.git import git
 from ShrutiMusic.core.userbot import Userbot
 from ShrutiMusic.misc import dbb, heroku
 
+import ShrutiMusic.core.style_patch  # noqa: F401  – monkey-patch Pyrogram for colored buttons
+
 from .logging import LOGGER
 
 dirr()
